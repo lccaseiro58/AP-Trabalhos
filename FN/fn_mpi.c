@@ -88,13 +88,13 @@ int main(int argc, char **argv)
     int my_start = rank*aux + start;
     int my_end = my_start + offset - 1;
 
-    int *local_the_num = calloc(offset,sizeof(int));
-    int *local_num = calloc(offset,sizeof(int));
-    int *local_den = calloc(offset,sizeof(int));
+    int *local_the_num = (int*)malloc(sizeof(int)*offset);
+    int *local_num = (int*)malloc(sizeof(int)*offset);
+    int *local_den = (int*)malloc(sizeof(int)*offset);
 
-    int *the_num = calloc(size,sizeof(int));
-    int *num = calloc(size,sizeof(int));
-    int *den = calloc(size,sizeof(int)); 
+    int *the_num = (int*)malloc(sizeof(int)*size);
+    int *num = (int*)malloc(sizeof(int)*size);
+    int *den = (int*)malloc(sizeof(int)*size); 
 
     Map(my_start,my_end,local_the_num,local_num,local_den);
 
@@ -105,8 +105,7 @@ int main(int argc, char **argv)
     MPI_Allgather(local_the_num,1,elems,the_num,1,elems,MPI_COMM_WORLD);
     MPI_Allgather(local_num,1,elems,num,1,elems,MPI_COMM_WORLD);
     MPI_Allgather(local_den,1,elems,den,1,elems,MPI_COMM_WORLD);
-
-    //printf("Passou processo com rank %d\n", rank);    
+   
 
     int i,j;
     if(rank == 0)
