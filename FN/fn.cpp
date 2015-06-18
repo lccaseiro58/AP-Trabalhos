@@ -14,7 +14,6 @@ void Get_args(int argc, char* argv[],int* start, int* end);
 int gcd(int u, int v);
 void printArray(int* array, int size);
 void generate(int itask, KeyValue *kv, void* ptr);
-void my_reduce(char *key, int keybytes, char *multivalue, int nvalues, int *valuebytes, KeyValue *kv, void *ptr);
 void output(char *key, int keybytes, char *multivalue, int nvalues, int *valuebytes, KeyValue *kv, void *ptr);
 
 typedef struct V {
@@ -96,11 +95,6 @@ void generate(int itask, KeyValue *kv, void* ptr)
         int n = inp->the_num[ii];
         kv->add((char *) &k,sizeof(Key),(char*) &n,sizeof(int));
     }
-}
-
-void my_reduce(char *key, int keybytes, char *multivalue, int nvalues, int *valuebytes, KeyValue *kv, void *ptr) 
-{
-    kv->add(key,keybytes,NULL,0);
 }
 
 void transform(int* numbers,char* mv, int nv,int* vb)
